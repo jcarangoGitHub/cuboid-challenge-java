@@ -5,6 +5,7 @@ create sequence IF NOT EXISTS hibernate_sequence start with 4 increment by 1;
 CREATE TABLE "BAGS" (
     "ID" bigint not null, 
     "VOLUME" double not null,
+    "TITLE" varchar (100),
      primary key ("ID")
 );
 
@@ -26,3 +27,6 @@ insert into "BAGS" ("ID", "VOLUME") values (3, 100.0);
 insert into "CUBOIDS" ("ID", "DEPTH", "HEIGHT", "WIDTH", "BAG_ID") values (1, 2.0, 3.0, 5.0, 1);
 insert into "CUBOIDS" ("ID", "DEPTH", "HEIGHT", "WIDTH", "BAG_ID") values (2, 2.0, 4.0, 4.0, 2);
 insert into "CUBOIDS" ("ID", "DEPTH", "HEIGHT", "WIDTH", "BAG_ID") values (3, 3.0, 3.0, 3.0, 3);
+
+UPDATE BAGS SET TITLE = 'Title 1' WHERE ID=1;
+UPDATE BAGS SET TITLE = 'Title 2' WHERE ID=2;
