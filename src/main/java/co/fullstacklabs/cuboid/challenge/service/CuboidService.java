@@ -12,6 +12,8 @@ import java.util.List;
 public interface CuboidService {
     CuboidDTO create(CuboidDTO cuboid);
 
+    void delete(CuboidDTO cuboidDTO);
+
     List<CuboidDTO> getAll();
 
 }

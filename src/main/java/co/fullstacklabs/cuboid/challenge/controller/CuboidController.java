@@ -2,6 +2,7 @@ package co.fullstacklabs.cuboid.challenge.controller;
 
 import co.fullstacklabs.cuboid.challenge.dto.CuboidDTO;
 import co.fullstacklabs.cuboid.challenge.service.CuboidService;
+import co.fullstacklabs.cuboid.challenge.validator.CuboidValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -30,8 +31,25 @@ public class CuboidController {
 
     @PostMapping()
     public ResponseEntity<CuboidDTO> create(@Valid @RequestBody final CuboidDTO cuboidDTO) {
+        if (!CuboidValidator.isValid(cuboidDTO)) {
+            return new ResponseEntity<>(null, HttpStatus.UNPROCESSABLE_ENTITY);
+        }
         CuboidDTO cuboid = service.create(cuboidDTO);
         return new ResponseEntity<>(cuboid, HttpStatus.CREATED);
+    }
+
+    @PutMapping()
+    public ResponseEntity<CuboidDTO> update(@Valid @RequestBody final CuboidDTO cuboidDTO) {
+        if (!CuboidValidator.isValid(cuboidDTO)) {
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        }
+        CuboidDTO cuboid = service.create(cuboidDTO);
+        return new ResponseEntity<>(cuboid, HttpStatus.OK);
+    }
+
+    @DeleteMapping()
+    public void delete(@Valid @RequestBody final CuboidDTO cuboidDTO) {
+        service.delete(cuboidDTO);
     }
 
     @GetMapping
