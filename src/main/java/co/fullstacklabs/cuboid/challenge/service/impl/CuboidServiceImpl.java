@@ -53,6 +53,13 @@ public class CuboidServiceImpl implements CuboidService {
         return mapper.map(cuboid, CuboidDTO.class);
     }
 
+    @Override
+    public void delete(CuboidDTO cuboidDTO) {
+        repository.findById(cuboidDTO.getId()).orElseThrow(() -> new ResourceNotFoundException("Cudoid to delete no found"));
+        Cuboid cuboid = mapper.map(cuboidDTO, Cuboid.class);
+        repository.delete(cuboid);
+    }
+
     /**
      * List all cuboids
      * @return List<CuboidDTO>
